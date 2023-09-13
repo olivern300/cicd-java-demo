@@ -1,0 +1,36 @@
+pipeline {
+   agent {
+        node {
+            label 'master'
+        }
+    }
+   stages {
+      stage('Preparation') {
+         steps {
+            cleanWs()
+            git credentialsId: 'git_access', branch: 'develop', url: "https://github.com/olivern300/cicd-java-demo.git"
+         }
+      }
+      stage('Create Application Build') {
+         steps {
+            sh '''cd hello-world
+               mvn install clean package'''
+         }
+      }
+      stage('Create Docker Image') {
+         steps{
+            withCredentials([usernamePassword( credentialsId: 'docker_access', usernameVariable: 'usr', passwordVariable: 'pass')]) {
+                  sh '''cd ansible
+                  ansible-playbook -i Inventory create-hw-image.yaml --extra-vars "dockerusr=${usr} dockerpass=${pass}"'''
+               }
+            }
+      }
+
+      stage('Deploy Comtainer') {
+         steps {
+            sh '''cd ansible
+               ansible-playbook -i Inventory deploy-on-docker.yaml'''
+         }
+      }
+   }
+}

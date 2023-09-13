@@ -1,0 +1,23 @@
+; -*-mode: ansible; coding: utf-8;-*-
+
+[localhost]
+localhost ansible_connection=local
+
+[jenkins]
+
+jenkins01     ansible_host=3.91.154.84      ansible_port=22     ansible_user=ubuntu     ansible_ssh_private_key_file="/opt/jenkins/.secrets/sample-project-key.pem"
+
+
+[webservers]
+
+webapp01       ansible_host=3.91.16.177      ansible_port=22     ansible_user=ubuntu     ansible_ssh_private_key_file="/opt/jenkins/.secrets/sample-project-key.pem"
+
+[all]
+
+jenkins01     ansible_host=3.91.154.84         ansible_port=22     ansible_user=ubuntu     ansible_ssh_private_key_file="/opt/jenkins/.secrets/sample-project-key.pem"
+webapp01      ansible_host=3.91.16.177      ansible_port=22     ansible_user=ubuntu     ansible_ssh_private_key_file="/opt/jenkins/.secrets/sample-project-key.pem"
+
+
+[all:vars]
+ansible_ssh_pipelining=no
+ansible_ssh_common_args='-o StrictHostKeyChecking=accept-new'

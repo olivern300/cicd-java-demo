@@ -1,0 +1,30 @@
+# Local .terraform directories
+**/.terraform/
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfplan files
+*.tfplan
+
+# Crash log files
+crash.log
+
+# Ignore any .tfvars files that are intended to be kept secret
+*.auto.tfvars
+*.auto.tfvars.json
+
+# .tfstate files should also be ignored
+*.tfstate
+*.tfstate.*
+
+# .terraform.lock.hcl should be ignored as well
+.terraform.lock.hcl
+
+# Environment variables file
+.terraformrc
+terraform.rc
+
+# .terraform directory
+.terraform/
