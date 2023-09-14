@@ -8,7 +8,7 @@ pipeline {
       stage('Preparation') {
          steps {
             cleanWs()
-            git credentialsId: 'git_access', branch: 'develop', url: "https://github.com/olivern300/cicd-java-demo.git"
+            git credentialsId: 'git_access', branch: 'main', url: "https://github.com/olivern300/cicd-java-demo.git"
          }
       }
       stage('Create Application Build') {
